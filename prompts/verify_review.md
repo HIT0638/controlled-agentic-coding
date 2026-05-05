@@ -47,6 +47,12 @@ List only commands that were explicitly approved and actually run.
 
 ### Results
 
+### Executed verification
+
+### Inspection-based verification
+
+### Unverified assumptions
+
 ### Tested Scenarios
 
 ### Untested Scenarios
@@ -62,7 +68,16 @@ Check:
 - No debug logs, dead code, or accidental TODOs.
 - Tests cover the main risk when feasible.
 
-## Residual Risks
+## Risk and Verification Coverage
+
+| Risk / property | Covered by | Evidence type | Result | Still unverified? |
+| --- | --- | --- | --- | --- |
+
+## Verification abstraction coverage
+
+## Residual unverified risks
+
+## Delegation judgment after verification
 
 ## Recommendation
 - approve
@@ -73,6 +88,7 @@ Exit criteria:
 - Commands and results are reported accurately and concisely.
 - Untested areas are explicit.
 - Diff scope is reviewed.
+- Residual risk and verification limits are explicit.
 - Recommendation is tied to evidence.
 
 If blocked:

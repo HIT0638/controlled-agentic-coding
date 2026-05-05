@@ -28,6 +28,7 @@ Rules:
 - Do not expand beyond the task.
 - Stop when you can identify relevant files, risks, and candidate tests.
 - Identify candidate related tests; do not run them unless the user explicitly approves verification commands.
+- Any delegation/risk output in this mode is preliminary read-only analysis only. It does not authorize edits or commands.
 
 Progressive disclosure:
 - Start from file names, search hits, imports, symbols, and small slices.
@@ -66,6 +67,21 @@ List candidate tests by path/symbol for later verification. Do not run them or r
 ### Risks
 ...
 
+### AI delegation risk add-on, if relevant
+Include this section only when the task has meaningful AI delegation, production, architecture, unknown-unknown, or verification-abstraction risk.
+
+#### Codebase position
+Summarize whether the task currently looks leaf, core, mixed, or unknown. Keep the judgment conservative and evidence-based.
+
+#### Risk Map
+List the highest-value hidden assumptions and failure modes only. Tailor them to the artifact type and codebase position.
+
+#### Verifiable abstraction candidates
+Name the most plausible abstraction levels where behavior could later be verified with minimal sufficient evidence.
+
+#### Preliminary delegation level
+Recommend D0-D4 as a provisional judgment only. State why, what evidence is missing, and what would lower or raise confidence.
+
 ### Unknowns
 ...
 
@@ -81,6 +97,7 @@ Exit criteria:
 - Current behavior is grounded in static file evidence or explicitly approved command output.
 - Likely change points are separated from approved edit scope.
 - Risks, unknowns, and candidate tests are explicit.
+- Add-on output is included only when relevant and stays preliminary.
 
 If blocked:
 - Ask for the smallest missing input or name exactly one more area to inspect.

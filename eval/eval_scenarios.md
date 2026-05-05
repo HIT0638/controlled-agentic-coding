@@ -282,7 +282,7 @@ Failure signs:
 Prompt:
 
 ```text
-Use controlled-agentic-coding. Explore this project codebase.
+Use tb-coding-workflow. Explore this project codebase.
 ```
 
 Context:
@@ -313,7 +313,7 @@ Failure signs:
 Prompt:
 
 ```text
-Use controlled-agentic-coding. Explore this project codebase.
+Use tb-coding-workflow. Explore this project codebase.
 ```
 
 Context:

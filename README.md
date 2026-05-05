@@ -1,127 +1,157 @@
-# Controlled Agentic Coding
+# Controlled Agentic Coding Workflow
 
-让 AI 编程助手在真实代码库中保持可控、可审计且有用的行为协议。
+这个仓库目录名目前仍然是 `controlled-agentic-coding`，但其中同步的完整 skill 内容已经以 `tb-coding-workflow` 为准。
 
-## 为什么需要这个 Skill
+也就是说：
 
-AI 编程助手在处理代码任务时经常遇到这些问题：
+- 仓库目录：`controlled-agentic-coding/`
+- skill frontmatter name：`tb-coding-workflow`
+- slash command 前缀：`/tb-coding-workflow:*`
 
-- **上下文有限** → 无法读取所有内容，必须谨慎选择
-- **文档过时** → 文档可能与代码不一致
-- **幻觉风险** → 可能编造不存在的 API 或行为
-- **任务漂移** → 范围在不知不觉中扩大
-- **过度重构** → "既然来了就顺便清理一下"
-- **脏工作树** → 覆盖用户的未提交变更
-- **验证不完整** → 声称成功却没真正测试
+如果后续你要统一品牌或包名，可以再单独做一次命名整理；当前这个 README 先忠实反映仓库里的实际内容。
 
-本 Skill 提供一套行为协议，让助手保持**可控、可审计、有用**。
+## 这是什么
 
-## 核心原则
+这是一套给 AI 编程助手使用的行为协议，用来在真实代码库中保持：
 
-1. **先读取，界定任务，编辑前获取审批**
-2. **只修改已批准的范围**
-3. **诚实验证** — 报告失败，不要隐瞒
-4. **保留用户变更** — 未经询问绝不覆盖
-5. **只提炼持久知识** — 不把任务噪音写进文档
+- 可控
+- 可审计
+- 有边界
+- 有验证纪律
+- 能在脏工作树、上下文不完整、文档可能过时的情况下继续有效工作
 
-## 模式
+它的核心不是“自动完成更多事”，而是减少这些常见失败模式：
 
-| 模式 | 用途 | 读/写 |
-|------|------|-------|
-| Project Map | 理解仓库结构 | 只读 |
+- 上下文有限，却假装已经理解全局
+- 把过时文档当成真相
+- 幻觉出不存在的 API、行为或运行路径
+- 任务范围悄悄扩张
+- 借机做无关重构
+- 覆盖用户已有改动
+- 没做验证却宣称成功
+
+## 核心工作流
+
+主工作流仍然是 7 个 mode：
+
+| Mode | 用途 | 默认性质 |
+| --- | --- | --- |
+| Project Map | 先理解仓库结构和入口 | 只读 |
 | Module Map | 理解单个模块边界 | 只读 |
-| Task Recon | 规划前收集上下文 | 只读 |
-| Plan Change | 制定实施计划 | 只读 |
-| Guarded Act | 实施已批准的变更 | 写入（仅已批准文件） |
-| Verify Review | 检查已完成的变更 | 读取 + 已批准的测试 |
-| Distill Handoff | 保留持久上下文 | 写入文档（如已批准） |
+| Task Recon | 为 feature / bug / refactor 做前置侦察 | 只读 |
+| Plan Change | 把上下文变成可执行计划 | 只读 |
+| Guarded Act | 在明确批准后做最小实现 | 可编辑，但仅限已批准范围 |
+| Verify Review | 复核变更与验证覆盖 | 只读，外加已批准验证命令 |
+| Distill Handoff | 提炼持久上下文与临时交接 | 默认提案；写文档仍需批准 |
 
-## 安装
+工作流的铁律仍然是：
 
-复制到项目的 `.claude/skills/` 目录：
+1. 先读取。
+2. 先界定任务。
+3. 编辑前获取明确批准。
+4. 只改已批准范围。
+5. 诚实验证。
+6. 只保留持久知识。
 
-```bash
-mkdir -p .claude/skills
-cp -r controlled-agentic-coding .claude/skills/
-```
+## AI Delegation Risk Add-on
 
-或全局安装（适用于 Claude Code CLI）：
+这份完整版本还包含一层附加分析组件，但它不是新 mode，也不是新的 permission system。
+
+它的作用是：在 Task Recon、Plan Change、Verify Review 这些阶段里，额外判断 AI 到底能安全接管多少实现责任。
+
+包含 4 个 add-on prompt：
+
+- `leaf_or_core`：判断任务更偏 leaf、core、mixed 还是仍未知
+- `risk_map`：列出最高价值的隐含风险和失败模式
+- `verifiable_abstraction`：找出最窄、最可验证的行为抽象层
+- `delegation_level`：给出 `D0-D4` 的委托/所有权判断
+
+注意：
+
+- 这不是新的 workflow mode
+- 它不会授予编辑权限
+- 它不会授予命令执行权限
+- `D0-D4` 不是 side-effect level，也不是 permission level
+
+## Slash Command Entrypoints
+
+仓库现在已经带有完整的 `commands/` 目录，作为 thin wrappers 暴露给支持 slash commands 的宿主 CLI。
+
+### Core workflow commands
+
+- `/tb-coding-workflow:project-map`
+- `/tb-coding-workflow:module-map`
+- `/tb-coding-workflow:task-recon`
+- `/tb-coding-workflow:plan-change`
+- `/tb-coding-workflow:guarded-act`
+- `/tb-coding-workflow:verify-review`
+- `/tb-coding-workflow:distill-handoff`
+
+### AI Delegation Risk Add-on commands
+
+- `/tb-coding-workflow:leaf-or-core`
+- `/tb-coding-workflow:risk-map`
+- `/tb-coding-workflow:verifiable-abstraction`
+- `/tb-coding-workflow:delegation-level`
+
+这些 command wrappers 只是 entrypoint：
+
+- 它们只负责暴露命令名
+- 它们只负责转向对应的 `prompts/*.md`
+- 它们可以接收 `$ARGUMENTS`
+- 它们不会改变 approval semantics
+- 它们不会改变 side-effect levels
+- 它们不会授予编辑权限或命令权限
+
+## 安装与调用
+
+如果你只是按目录安装 skill，可以继续复制这个仓库目录：
 
 ```bash
 mkdir -p ~/.claude/skills
 cp -r controlled-agentic-coding ~/.claude/skills/
 ```
 
-## 快速开始
+但要注意，实际被调用的 skill 名已经是 `tb-coding-workflow`。
 
-当让 AI 编程助手处理非常规任务时：
+典型调用方式：
 
-```
-使用 controlled-agentic-coding。
+```text
+使用 tb-coding-workflow。
 
 目标：修复解析器在空输入时的空指针崩溃。
 ```
 
-助手会：
-1. 以只读模式开始（Task Recon 或 Project Map）
-2. 识别相关文件和风险
-3. 提出最小化的计划
-4. 等待你明确批准后才编辑
-5. 诚实验证并报告剩余风险
+如果宿主 CLI 支持 slash commands，也可以直接走 command entrypoint，例如：
 
-## 审批语义
-
-以下**算作编辑审批**：
-- "执行此计划。"
-- "按已批准的计划执行。"
-- "你可以编辑这些文件。"
-- "修改 `path/to/file`。"
-
-以下**不算作编辑审批**：
-- "修复这个。"
-- "看看这个。"
-- "哪里有问题？"
-- "你能改进这个吗？"
-- "继续。"
-- "审查这个。"
-- "规划这个。"
-
-如果审批模糊，助手会保持只读。
-
-## 成本等级
-
-| 等级 | 描述 | 示例 |
-|------|------|------|
-| L0 | 源码检查 | 读取文件名、符号、片段 |
-| L1 | 元数据发现 | 识别候选命令/测试 |
-| L2 | 执行 | 运行已批准的测试/检查 |
-| L3 | 调试/修复循环 | 迭代诊断 + 修复 |
-
-助手不会从 L0 升级到 L1/L2/L3，除非说明原因并获得批准。
-
-## 文档结构
-
-```
-project/
-├── AGENTS.md                    # 全局仓库规则
-└── docs/
-    └── agent/
-        ├── project-map.md       # 项目概述
-        ├── modules/             # 模块边界
-        │   ├── auth.md
-        │   └── api.md
-        ├── handoffs/            # 任务延续状态
-        └── decisions/           # 架构决策
+```text
+/tb-coding-workflow:task-recon 修复解析器在空输入时的空指针崩溃
+/tb-coding-workflow:plan-change parser 空输入崩溃修复的上下文包
+/tb-coding-workflow:risk-map parser 空输入处理逻辑
 ```
 
-持久文档必须包含新鲜度时间戳和证据引用。
+## 仓库结构
 
-## 相关文件
+当前这份完整同步版的主要结构是：
 
-- [prompts/](prompts/) — 模式模板
-- [reference/](reference/) — 详细规则
-- [eval/](eval/) — 评估场景
+```text
+controlled-agentic-coding/
+├── SKILL.md
+├── commands/
+├── prompts/
+├── reference/
+├── eval/
+└── LICENSE
+```
+
+各目录职责：
+
+- [commands/](commands/)：slash command thin wrappers
+- [prompts/](prompts/)：主工作流与 add-on prompt 模板
+- [reference/](reference/)：审批、side-effect、文档路由、delegation 风险等参考规则
+- [eval/](eval/)：用于检查 agent 是否遵守这套协议的评估场景
+
 
 ## 许可证
 
-MIT License — 详见 [LICENSE](LICENSE)。
+MIT License，见 [LICENSE](LICENSE)。

@@ -1,5 +1,5 @@
 ---
-name: controlled-agentic-coding
+name: tb-coding-workflow
 description: >-
   Use when an AI coding agent is handling a non-trivial code task that needs scoped exploration, approval gates, minimal diffs, honest verification, or durable handoff notes.
 metadata:
@@ -121,6 +121,54 @@ Never move from a lower level to a higher level without stating the reason and g
 11. Never escalate from L0 to L1, L2, or L3 without explicit reason and approval when required.
 
 See also [reference/progressive_disclosure.md](reference/progressive_disclosure.md) and [reference/command_file_safety.md](reference/command_file_safety.md).
+
+## AI Delegation Risk Add-on
+
+This is a cross-cutting analysis add-on, not a new mode, permission level, or approval path.
+
+It inherits the current mode's side-effect level. It does not authorize edits, command execution, installs, tests, or project-code execution.
+
+Use it inside Task Recon, Plan Change, and Verify Review when the workflow must decide where AI can safely contribute and where human control must stay primary.
+
+Components:
+
+- [prompts/leaf_or_core.md](prompts/leaf_or_core.md): classify whether the touched area is leaf, core, mixed, or still unknown.
+- [prompts/risk_map.md](prompts/risk_map.md): surface the highest-value hidden assumptions, failure modes, and unknown unknowns.
+- [prompts/verifiable_abstraction.md](prompts/verifiable_abstraction.md): identify the narrowest abstraction where behavior can be checked without pretending that design quality was proven.
+- [prompts/delegation_level.md](prompts/delegation_level.md): assign a delegation level D0-D4 based on position, risk, and verification shape.
+
+Reference rules and boundaries live in [reference/ai_delegation_risk.md](reference/ai_delegation_risk.md).
+
+Use these add-ons selectively. Do not turn them into a generic checklist. Tailor them to the artifact type, codebase position, and claimed behavior.
+
+## Command Entrypoints
+
+If the host CLI supports slash commands, expose thin command wrappers under `commands/`.
+
+Recommended command names:
+
+Core workflow commands:
+
+- `/tb-coding-workflow:project-map`
+- `/tb-coding-workflow:module-map`
+- `/tb-coding-workflow:task-recon`
+- `/tb-coding-workflow:plan-change`
+- `/tb-coding-workflow:guarded-act`
+- `/tb-coding-workflow:verify-review`
+- `/tb-coding-workflow:distill-handoff`
+
+AI Delegation Risk Add-on commands:
+
+- `/tb-coding-workflow:leaf-or-core`
+- `/tb-coding-workflow:risk-map`
+- `/tb-coding-workflow:verifiable-abstraction`
+- `/tb-coding-workflow:delegation-level`
+
+Command wrappers must be thin. They should reference the corresponding prompt template and must not duplicate large workflow rules.
+
+A command entrypoint does not change approval semantics, side-effect levels, edit permissions, command permissions, or delegation boundaries.
+
+Add-on command entrypoints are not new workflow modes. They inherit the current workflow mode and side-effect level.
 
 ## Red Flags - Stop
 
