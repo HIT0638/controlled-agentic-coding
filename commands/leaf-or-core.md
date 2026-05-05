@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:leaf-or-core
+name: controlled-agentic-coding:leaf-or-core
 description: Classify whether a task touches leaf code, architecture-sensitive core code, mixed boundaries, or unknown areas.
 argument-hint: "[task, files, module, diff, or artifact]"
 ---

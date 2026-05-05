@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:verify-review
+name: controlled-agentic-coding:verify-review
 description: Verify completed changes, inspect diffs, and report untested risks honestly.
 argument-hint: "[task, changed files, approved verification commands if any]"
 ---

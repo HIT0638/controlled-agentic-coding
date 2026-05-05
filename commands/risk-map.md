@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:risk-map
+name: controlled-agentic-coding:risk-map
 description: Surface hidden assumptions, failure modes, and unknown unknowns for a scoped coding task.
 argument-hint: "[task, file, module, API, pipeline, config, or diff]"
 ---

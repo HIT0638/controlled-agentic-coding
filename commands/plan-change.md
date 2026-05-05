@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:plan-change
+name: controlled-agentic-coding:plan-change
 description: Turn task context into a concrete implementation plan before edits.
 argument-hint: "[task and context pack]"
 ---

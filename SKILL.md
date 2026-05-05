@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow
+name: controlled-agentic-coding
 description: >-
   Use when an AI coding agent is handling a non-trivial code task that needs scoped exploration, approval gates, minimal diffs, honest verification, or durable handoff notes.
 metadata:
@@ -149,20 +149,20 @@ Recommended command names:
 
 Core workflow commands:
 
-- `/tb-coding-workflow:project-map`
-- `/tb-coding-workflow:module-map`
-- `/tb-coding-workflow:task-recon`
-- `/tb-coding-workflow:plan-change`
-- `/tb-coding-workflow:guarded-act`
-- `/tb-coding-workflow:verify-review`
-- `/tb-coding-workflow:distill-handoff`
+- `/controlled-agentic-coding:project-map`
+- `/controlled-agentic-coding:module-map`
+- `/controlled-agentic-coding:task-recon`
+- `/controlled-agentic-coding:plan-change`
+- `/controlled-agentic-coding:guarded-act`
+- `/controlled-agentic-coding:verify-review`
+- `/controlled-agentic-coding:distill-handoff`
 
 AI Delegation Risk Add-on commands:
 
-- `/tb-coding-workflow:leaf-or-core`
-- `/tb-coding-workflow:risk-map`
-- `/tb-coding-workflow:verifiable-abstraction`
-- `/tb-coding-workflow:delegation-level`
+- `/controlled-agentic-coding:leaf-or-core`
+- `/controlled-agentic-coding:risk-map`
+- `/controlled-agentic-coding:verifiable-abstraction`
+- `/controlled-agentic-coding:delegation-level`
 
 Command wrappers must be thin. They should reference the corresponding prompt template and must not duplicate large workflow rules.
 

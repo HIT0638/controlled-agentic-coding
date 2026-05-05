@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:project-map
+name: controlled-agentic-coding:project-map
 description: Create a compact source-only project map before deeper coding work.
 argument-hint: "[repository context or broad onboarding request]"
 ---

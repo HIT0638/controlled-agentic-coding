@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:delegation-level
+name: controlled-agentic-coding:delegation-level
 description: Decide how much implementation ownership AI may safely take based on position, risk, and verifiability.
 argument-hint: "[task plus optional leaf-or-core/risk-map/verifiable-abstraction outputs]"
 ---

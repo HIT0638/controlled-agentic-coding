@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:module-map
+name: controlled-agentic-coding:module-map
 description: Map one module boundary, entry points, dependencies, candidate tests, and risks.
 argument-hint: "[module name and paths]"
 ---

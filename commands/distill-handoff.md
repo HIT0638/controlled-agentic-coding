@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:distill-handoff
+name: controlled-agentic-coding:distill-handoff
 description: Preserve durable context and separate stable documentation from temporary handoff notes.
 argument-hint: "[task summary and current state]"
 ---

@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:guarded-act
+name: controlled-agentic-coding:guarded-act
 description: Implement an explicitly approved plan with minimal scoped edits.
 argument-hint: "[approved plan and approved files]"
 ---

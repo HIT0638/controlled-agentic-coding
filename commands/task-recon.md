@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:task-recon
+name: controlled-agentic-coding:task-recon
 description: Perform read-only task reconnaissance before planning a feature, bug fix, or refactor.
 argument-hint: "[task description]"
 ---

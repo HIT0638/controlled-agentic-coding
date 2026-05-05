@@ -1,5 +1,5 @@
 ---
-name: tb-coding-workflow:verifiable-abstraction
+name: controlled-agentic-coding:verifiable-abstraction
 description: Identify the narrowest useful abstraction layer and oracle for verifying claimed behavior.
 argument-hint: "[task and claimed behavior]"
 ---
